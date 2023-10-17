@@ -86,6 +86,7 @@ def game(mat, i, j, turn):
     if turn == 0:
         mat[i][j] = "X"
     else:
+        # Will be the AI
         mat[i][j] = "O"
 
     update(mat)
@@ -102,7 +103,8 @@ def window():
 
     for i in range(3):
         for j in range(3):
-            buttons[i][j] = tk.Button(win, width=7, height=3, font=('Arial', 24), command=lambda i=i, j=j: game(mat, i, j, turn))
+            buttons[i][j] = tk.Button(win, width=7, height=3, font=('Arial', 24),
+                                      command=lambda i=i, j=j: game(mat, i, j, turn))
             buttons[i][j].grid(row=i, column=j)
 
     win.mainloop()
@@ -131,3 +133,24 @@ def winner(player):
     close_button.pack()
 
     winner_window.mainloop()
+
+def isGameOver(mat):
+    for i in range(3):
+        if ((mat[i][0] == mat[i][1] == mat[i][2]) or (mat[0][i] == mat[1][i] == mat[2][i])) and mat[i][i]:
+            return True
+
+    if ((mat[0][0] == mat[1][1] == mat[2][2]) or (mat[0][2] == mat[1][1] == mat[2][0])) and mat[1][1]:
+        return True
+
+    for i in range(3):
+        for j in range(3):
+            if mat[i][j]:
+                return False
+    return True
+
+def minimax():
+    global mat, totTurn, turn
+
+    if totTurn == 1:
+        game(mat, 0, 0, turn)
+
