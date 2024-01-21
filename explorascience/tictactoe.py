@@ -1,8 +1,15 @@
 import tkinter as tk
 from tkinter import messagebox
+import os
+import json as js
 
 
 mat = turn = buttons = totTurn = win = winner_window = None
+turnSym = ["X", "0"]
+
+
+jsonFile = r"Includes/tictactoe.json"
+
 
 def start():
     global mat, turn, buttons, totTurn
@@ -17,6 +24,8 @@ def start():
     turn_select()
 
 def turn_select():
+    global turnSym, turn
+
     turn_window = tk.Tk()
     turn_window.title('Choose Turn')
     turn_window.geometry('250x100')
@@ -25,8 +34,11 @@ def turn_select():
     label.pack(pady=10)
 
     def set_turn(turn_value):
-        global turn
-        turn = turn_value
+        global turnSym, turn
+
+        if turn_value:
+            turnSym[0], turnSym[1] = turnSym[1], turnSym[0]
+
         turn_window.destroy()
         window()
 
@@ -83,11 +95,14 @@ def game_end(mat):
 
 
 def game(mat, i, j, turn):
-    if turn == 0:
+    global turnSym
+
+    if turnSym[turn] == "X":
         mat[i][j] = "X"
     else:
         # Will be the AI
         mat[i][j] = "O"
+        # mat = iaTurn(mat)
 
     update(mat)
 
@@ -148,9 +163,8 @@ def isGameOver(mat):
                 return False
     return True
 
-def minimax():
-    global mat, totTurn, turn
-
-    if totTurn == 1:
-        game(mat, 0, 0, turn)
-
+def iaTurn(mat):
+    pass
+    # TODO
+    # Read Json file to search for the current matrix state
+    # Return the matrix "updated"
