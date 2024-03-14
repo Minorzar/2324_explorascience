@@ -1,3 +1,4 @@
+import json
 import tkinter as tk
 from tkinter import messagebox
 import os
@@ -8,16 +9,27 @@ mat = turn = buttons = totTurn = win = winner_window = None
 turnSym = ["X", "0"]
 
 
-jsonFile = r"Includes/tictactoe.json"
+jsonFilePstart = r"Includes/tttPStart.json"
+jsonFileIA = r"Includes/tttIA.json"
+dataP = None
+dataI = None
 
 
 def start():
-    global mat, turn, buttons, totTurn
+    global mat, turn, buttons, totTurn, dataP, dataI
 
     mat = [["", "", ""] for _ in range(3)]
     turn = 0
     buttons = []
     totTurn = 1
+
+    with open(jsonFilePstart) as file:
+        dataP = js.load(file)
+    file.close()
+
+    with open(jsonFileIA) as file:
+        dataI = js.load(file)
+    file.close()
 
     print(f'You have choosen the game Tic-Tac-Toe !')
 
@@ -77,6 +89,7 @@ def update(mat):
 
     game_end(mat)
 
+
 def game_end(mat):
     global turn, totTurn
 
@@ -97,14 +110,21 @@ def game_end(mat):
 def game(mat, i, j, turn):
     global turnSym
 
-    if turnSym[turn] == "X":
-        mat[i][j] = "X"
+    if i == -1 and j == -1:
+        if turnSym[turn] == "X":
+            pass
+        else:
+            (i, j) = iaTurn(mat, turn)
+            mat[i][j] = "O"
+            update(mat)
     else:
-        # Will be the AI
-        mat[i][j] = "O"
-        # mat = iaTurn(mat)
-
-    update(mat)
+        if turnSym[turn] == "X":
+            mat[i][j] = "X"
+            update(mat)
+        else:
+            (i, j) = iaTurn(mat, turn)
+            mat[i][j] = "O"
+            update(mat)
 
 
 def window():
@@ -112,7 +132,7 @@ def window():
 
     win = tk.Tk()
     win.title('Tic-Tac-Toe')
-    win.geometry('420x400')
+    win.geometry('420x475')
 
     buttons = [[None, None, None] for _ in range(3)]
 
@@ -121,6 +141,9 @@ def window():
             buttons[i][j] = tk.Button(win, width=7, height=3, font=('Arial', 24),
                                       command=lambda i=i, j=j: game(mat, i, j, turn))
             buttons[i][j].grid(row=i, column=j)
+
+    but = tk.Button(win, font=('Arial', 24), text="Update", command=lambda i=-1, j=-1: game(mat, i, j, turn))
+    but.grid(row=3, column=1)
 
     win.mainloop()
 
@@ -163,8 +186,18 @@ def isGameOver(mat):
                 return False
     return True
 
-def iaTurn(mat):
-    pass
-    # TODO
-    # Read Json file to search for the current matrix state
-    # Return the matrix "updated"
+def parsec(mat, data):
+    for obj in data:
+        if mat == obj["table"]:
+            i = obj["move"]["i"]
+            j = obj["move"]["j"]
+            return i, j
+
+def iaTurn(mat, turn):
+    global dataP, dataI
+    if turn % 2:
+        (i, j) = parsec(mat, dataP)
+    else:
+        (i, j) = parsec(mat, dataI)
+
+    return i, j
