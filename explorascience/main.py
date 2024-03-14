@@ -2,7 +2,6 @@ import tkinter as tk
 import tictactoe as ttt
 import sudoku as sd
 import connect_4 as cf
-from extract_double import extract
 
 
 def choose_game():
