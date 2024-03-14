@@ -12,7 +12,7 @@ The algorithms I chose to present are:
 
 ## Predictive
 
-I chose to demonstrate the predictive algorithm using a very easy game: Tic Tac Toe. All the data is stored inside two JSON files [when the player starts](explorascience/tictactoe/Includes/tttPStart) and [when the AI starts](explorascience/tictactoe/Includes/tttIA).
+I chose to demonstrate the predictive algorithm using a very easy game: Tic Tac Toe. All the data is stored inside two JSON files [when the player starts](explorascience/tictactoe/Includes/tttPStart.json) and [when the AI starts](explorascience/tictactoe/Includes/tttIA.json).
 
 All the code that handles the game and the AI can be found [here](explorascience/tictactoe).
 
