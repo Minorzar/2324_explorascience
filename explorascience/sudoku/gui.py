@@ -1,5 +1,5 @@
 import pygame
-from Includes.sudoku import cell
+from sudoku import cell
 
 Cell = cell.Cell
 WIDTH, HEIGHT = 510, 700

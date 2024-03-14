@@ -1,7 +1,7 @@
 import tkinter as tk
-import tictactoe as ttt
-import sudoku as sd
-import connect_4 as cf
+from tictactoe import tictactoe as ttt
+from sudoku import sudoku as sd
+from connect4 import connect_4 as cf
 
 
 def choose_game():
