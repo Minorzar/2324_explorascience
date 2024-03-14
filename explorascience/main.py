@@ -6,18 +6,30 @@ import connect_4 as cf
 
 def choose_game():
     window = tk.Tk()
-    window.geometry('450x110')
+    window.geometry('450x85')
+
+    def set_flag(value):
+        match value:
+            case 0:
+                window.destroy()
+                ttt.start()
+            case 1:
+                window.destroy()
+                cf.start()
+            case 2:
+                window.destroy()
+                sd.start()
+            case _:
+                pass
 
     window.title("Choose window")
-    tictac = tk.Button(window, text="Tic-Tac-Toe", command=ttt.start, width=20, height=5)
-    confour = tk.Button(window, text="Connect 4", command=cf.start, width=20, height=5)
-    sudoku = tk.Button(window, text="Sudoku", command=sd.start, width=20, height=5)
-    close = tk.Button(window, text="Close", command=window.destroy)
+    tictac = tk.Button(window, text="Tic-Tac-Toe", command=lambda: set_flag(0), width=20, height=5)
+    confour = tk.Button(window, text="Connect 4", command=lambda: set_flag(1), width=20, height=5)
+    sudoku = tk.Button(window, text="Sudoku", command=lambda: set_flag(2), width=20, height=5)
 
     tictac.grid(row=0, column=0)
     confour.grid(row=0, column=1)
     sudoku.grid(row=0, column=2)
-    close.grid(row=2, column=1)
 
     window.mainloop()
 
