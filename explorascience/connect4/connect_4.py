@@ -244,7 +244,7 @@ def play():
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 pygame.draw.rect(screen, BLACK, (0, 0, width, SQUARESIZE))
-                # print(event.pos)
+
                 # Ask for Player 1 Input
                 if turn == PLAYER:
                     posx = event.pos[0]
@@ -266,13 +266,9 @@ def play():
 
         # # Ask for Player 2 Input
         if turn == AI and not game_over:
-
-            # col = random.randint(0, COLUMN_COUNT-1)
-            # col = pick_best_move(board, AI_PIECE)
             col, minimax_score = minimax(board, 5, -math.inf, math.inf, True)
 
             if is_valid_location(board, col):
-                # pygame.time.wait(500)
                 row = get_next_open_row(board, col)
                 drop_piece(board, row, col, AI_PIECE)
 

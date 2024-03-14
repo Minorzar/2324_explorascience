@@ -9,8 +9,8 @@ mat = turn = buttons = totTurn = win = winner_window = None
 turnSym = ["X", "0"]
 
 
-jsonFilePstart = r"Includes/tttPStart.json"
-jsonFileIA = r"Includes/tttIA.json"
+jsonFilePstart = r"tictactoe/Includes/tttPStart.json"
+jsonFileIA = r"tictactoe/Includes/tttIA.json"
 dataP = None
 dataI = None
 

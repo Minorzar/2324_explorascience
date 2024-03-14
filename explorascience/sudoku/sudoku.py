@@ -1,6 +1,6 @@
 import pygame
 import math
-from Includes.sudoku import gui, grid
+from sudoku import grid, gui
 import time
 
 
