@@ -16,10 +16,10 @@ class GUI:
         self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
         pygame.display.set_caption("Sudoku")
 
-        pygame.font.init()  # INITIALISE FONT
+        pygame.font.init()  # Initialise font
         self.my_font = pygame.font.SysFont('Century Schoolbook', 40)
 
-        self.grid_cells = []  # INITIALISE GRID
+        self.grid_cells = []  # Initialise grid
         for i in range(DIM):
             self.grid_cells.append([Cell(i, j) for j in range(DIM)])
 
